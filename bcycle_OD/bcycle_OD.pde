@@ -43,11 +43,11 @@ void setup()
     loc_buttons[i-1] = new roundButton(p.x,p.y,10);
     //text(locations.getString(i,1),p.x,p.y);
   }
+  map.resize(1000,600);
 }
 
 void draw()
 {
-  map.resize(1000,600);
   background(200);
   image(map,0,0);
   fill(0);
@@ -64,6 +64,10 @@ void draw()
     w = geoToPixel(new PVector(locations.getFloat(i,4),locations.getFloat(i,3)));
     fill(190,190,190,250);
     ellipse(w.x,w.y,5,5);
+  }
+  
+  if (maxCircleSize < 70){
+    maxCircleSize += 5;
   }
   
   
@@ -103,11 +107,17 @@ void draw()
 }
 
 void mousePressed(){
-  background(0);
+  //background(0);
+  image(map,0,0);
+  fill(0);
+  rect(0,0,1000,10);
+  rect(0,0,10,1000);
+  rect(990,0,10,1000);
+  rect(0,590,1000,10);
   for (int i =1;i<locations.getRowCount();i++){
     if (loc_buttons[i-1].checkPress()){
       selectedID = locations.getInt(i,0);
-      println(selectedID);
+      maxCircleSize = 0;
     }
   }
   
